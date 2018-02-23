@@ -3,24 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   mat3_id_new.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niragne <niragne@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iburel <iburel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 17:30:37 by niragne           #+#    #+#             */
-/*   Updated: 2018/02/14 17:35:31 by niragne          ###   ########.fr       */
+/*   Updated: 2018/02/23 15:33:54 by iburel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmat.h"
 
-t_mat3    mat3_id_new(void)
+mat3    mat3_id_new(void)
 {
-    t_mat4 ret;
+    mat3 ret;
 
-    if (!(ret = malloc(sizeof(float) * 9))) //
-        exit(1);
-    bzero(ret, sizeof(float) * 9);
-    ret[0] = 1;
-    ret[4] = 1;
-    ret[8] = 1;
+    ret = mat3_new();
+    ret[0] = 1.f; ret[3] = 0.f; ret[6] = 0.f;
+    ret[1] = 0.f; ret[4] = 1.f; ret[7] = 0.f;
+    ret[2] = 0.f; ret[5] = 0.f; ret[8] = 1.f;
     return (ret);
 }

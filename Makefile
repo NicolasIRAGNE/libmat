@@ -3,30 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: niragne <niragne@student.42.fr>            +#+  +:+       +#+         #
+#    By: iburel <iburel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/14 14:43:13 by niragne           #+#    #+#              #
-#    Updated: 2018/02/23 14:52:44 by niragne          ###   ########.fr        #
+#    Updated: 2018/02/23 16:05:19 by iburel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libmat.a
+NAME			=	libmat.a
 
-CC = gcc
+CC				=	gcc
+RM				=	/bin/rm
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS			=	-Wall -Wextra -Werror -Ofast
 
-SRC_FILES = mat4_new.c mat3_new.c mat3_mult.c mat4_mult.c mat3_id_new.c \
-			mat4_id_new.c mat4_rotate.c vec3_normalize.c mat4_vec3_mult.c \
-			mat4_translate.c vec3_cross.c vec3_add.c vec3_sub.c mat4_perspective.c \
-			vec3_dot.c
+SRCS			=	mat4_new.c mat3_new.c mat3_mult.c mat4_mult.c mat3_id_new.c \
+					mat4_id_new.c mat4_rotate.c vec3_normalize.c mat4_zoom.c \
+					mat4_translate.c vec3_cross.c vec3_add.c vec3_sub.c mat4_perspective.c \
+					vec3_dot.c cam_lookat.c cam_move.c cam_orient.c cam_settarget.c
 
-SRC_PATH = src
-SRC = $(addprefix $(SRC_PATH)/, $(SRC_FILES))
-OBJ_PATH = obj
-INCLUDES_PATH = include
-INCLUDES = -I $(INCLUDES_PATH)
-OBJ = $(addprefix $(OBJ_PATH)/, $(SRC_FILES:.c=.o))
+SRC_DIR			=	src
+OBJ_DIR			=	obj
+
+SRC				=	$(addprefix $(SRC_DIR)/, $(SRCS))
+OBJ 			= 	$(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+
+INCL_DIR 		= 	include
+INCL			=	$(INCL_DIR)/libmat.h
 
 all: $(NAME)
 
@@ -34,13 +37,16 @@ $(NAME): $(OBJ)
 	ar rc $@ $^
 	ranlib $@
 
-obj/%.o: $(SRC_PATH)/%.c include/libmat.h include/libft.h
-	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCL)
+	$(CC) -o $@ -c $< $(CFLAGS) -I $(INCL_DIR)
 
 clean:
-	/bin/rm -f $(OBJ)
+	$(RM) -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) -f $(NAME)
 
-re : clean all
+re : fclean
+	make -j
+
+.PHONY: all clean fclean re

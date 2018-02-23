@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mat4_vec3_mult.c                                   :+:      :+:    :+:   */
+/*   mat4_zoom.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niragne <niragne@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iburel <iburel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 12:14:48 by niragne           #+#    #+#             */
-/*   Updated: 2018/02/16 15:58:33 by niragne          ###   ########.fr       */
+/*   Updated: 2018/02/23 16:01:13 by iburel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmat.h"
 
-t_mat4	mat4_vec3_mult(t_mat4 m, t_vec3 v)
+void	mat4_zoom(mat4 *m, vec3 *v)
 {
-	t_mat4	ret;
+	mat4	zoom;
+	mat4	tmp;
 
-    ret = mat4_id_new();
-	ret[0] = v.x;
-	ret[5] = v.y;
-	ret[10] = v.z;
-    ret = mat4_mult(ret, m);
-	return (ret);
+    zoom = mat4_new();
+    zoom[0] = v->x; zoom[4] = 0.f;  zoom[8] = 0.f;   zoom[12] = 0.f;
+    zoom[1] = 0.f;  zoom[5] = v->y; zoom[9] = 0.f;   zoom[13] = 0.f;
+    zoom[2] = 0.f;  zoom[6] = 0.f;  zoom[10] = v->z; zoom[14] = 0.f;
+    zoom[3] = 0.f;  zoom[7] = 0.f;  zoom[11] = 0.f;  zoom[15] = 1.f;
+	tmp = *m;
+    *m = mat4_mult(zoom, *m);
+	free(tmp);
+	free(zoom);
 }

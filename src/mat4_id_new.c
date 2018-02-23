@@ -6,22 +6,20 @@
 /*   By: iburel <iburel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 17:32:52 by niragne           #+#    #+#             */
-/*   Updated: 2018/02/22 14:43:20 by iburel           ###   ########.fr       */
+/*   Updated: 2018/02/23 15:37:30 by iburel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmat.h"
 
-t_mat4    mat4_id_new(void)
+mat4    mat4_id_new(void)
 {
-    t_mat4 ret;
+    mat4 ret;
 
-    if (!(ret = malloc(sizeof(float) * 16))) //
-        exit(1);
-    bzero(ret, sizeof(float) * 16);
-    ret[0] = 1.f;
-    ret[5] = 1.f;
-    ret[10] = 1.f;
-    ret[15] = 1.f;
+	ret = mat4_new();
+    ret[0] = 1.f; ret[4] = 0.f; ret[8] = 0.f;  ret[12] = 0.f;
+    ret[1] = 0.f; ret[5] = 1.f; ret[9] = 0.f;  ret[13] = 0.f;
+    ret[2] = 0.f; ret[6] = 0.f; ret[10] = 1.f; ret[14] = 0.f;
+    ret[3] = 0.f; ret[7] = 0.f; ret[11] = 0.f; ret[15] = 1.f;
     return (ret);
 }

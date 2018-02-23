@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_sub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niragne <niragne@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iburel <iburel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 13:47:08 by niragne           #+#    #+#             */
-/*   Updated: 2018/02/18 13:47:23 by niragne          ###   ########.fr       */
+/*   Updated: 2018/02/23 15:51:17 by iburel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmat.h"
 
-t_vec3      vec3_sub(t_vec3 u, t_vec3 v)
+vec3      vec3_sub(vec3 *u, vec3 *v)
 {
-    t_vec3 ret;
+    vec3 ret;
 
-    ret.x = u.x - v.x;
-    ret.y = u.y - v.y;
-    ret.z = u.z - v.z;
+    ret.x = u->x - v->x;
+    ret.y = u->y - v->y;
+    ret.z = u->z - v->z;
     return (ret);
 }

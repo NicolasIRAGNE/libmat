@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   mat4_mult.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niragne <niragne@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iburel <iburel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 15:32:19 by niragne           #+#    #+#             */
-/*   Updated: 2018/02/14 19:50:07 by niragne          ###   ########.fr       */
+/*   Updated: 2018/02/23 15:37:43 by iburel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmat.h"
 
-t_mat4  mat4_mult(t_mat4 a, t_mat4 b)
+mat4  mat4_mult(mat4 a, mat4 b)
 {
-    t_mat4 r;
+    mat4 r;
 
     r = mat4_new();
     r[0] = a[0] * b[0] + a[1] * b[4] + a[2] * b[8] + a[3] * b[12];
